@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard Financeiro</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      display: flex;
+      background-color: #1C1C2E;
+      color: white;
+    }
+
+    .sidebar {
+      width: 250px;
+      background-color: #372F7C;
+      height: 100vh;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .sidebar nav a {
+      display: block;
+      color: white;
+      text-decoration: none;
+      padding: 10px 0;
+      margin: 10px 0;
+      border-radius: 8px;
+      transition: background 0.3s;
+    }
+
+    .sidebar nav a:hover, .sidebar nav a.active {
+      background-color: #00E1FF;
+      color: black;
+    }
+
+    .dark-mode-toggle {
+      display: flex;
+      align-items: center;
+      margin-top: 20px;
+    }
+
+    .main-content {
+      flex: 1;
+      padding: 30px;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .card {
+      background: #5D52B9;
+      border-radius: 20px;
+      padding: 20px;
+      margin: 20px 0;
+      color: white;
+    }
+
+    .analytics, .transactions {
+      background: #292542;
+      border-radius: 20px;
+      padding: 20px;
+      margin-top: 20px;
+    }
+
+    .transactions table {
+      width: 100%;
+      color: white;
+      border-collapse: collapse;
+    }
+
+    .transactions th, .transactions td {
+      padding: 10px;
+      text-align: left;
+    }
+
+    .card-summary, .card-info {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .status-approved {
+      color: #00FFAA;
+    }
+
+    .profile {
+      text-align: center;
+    }
+
+    .profile img {
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+    }
+  </style>
+</head>
+<body>
+  <div class="sidebar">
+    <div>
+      <nav>
+        <a class="active" href="#">Dashboard</a>
+        <a href="#">Gráficos</a>
+        <a href="#">Minha Carteira</a>
+        <a href="#">Minha Conta</a>
+        <a href="#">Configurações</a>
+      </nav>
+      <div class="dark-mode-toggle">
+        <label for="darkToggle">Dark Mode</label>
+        <input type="checkbox" id="darkToggle" checked />
+      </div>
+    </div>
+    <div class="profile">
+      <img src="https://via.placeholder.com/60" alt="Ali Riaz">
+      <p>Ali Riaz</p>
+      <small>Web Developer</small>
+    </div>
+  </div>
+
+  <div class="main-content">
+    <div class="header">
+      <div>
+        <h2>BEM-VINDO, MORENO! 👋</h2>
+        <p>O QUE VAMOS FAZER HOJE??</p>
+      </div>
+      <input type="text" placeholder="Search for anything...">
+    </div>
+
+    <div class="card card-summary">
+      <div>
+        <p>Saldo Total</p>
+        <h2>R$632.000</h2>
+      </div>
+      <span style="color: #00FFAA;">+13%</span>
+    </div>
+
+    <div class="analytics">
+      <h3>Analytics</h3>
+      <p>Gráfico de receitas e despesas aqui</p>
+      <!-- Gráfico real pode ser adicionado com JS/lib de gráficos -->
+    </div>
+
+    <div class="card card-info">
+      <div>
+        <h4>Meu cartão</h4>
+        <p>Saldo do cartão</p>
+        <h3>R$ 14.500,54</h3>
+      </div>
+      <div style="background: black; padding: 20px; border-radius: 12px;">
+        <p style="color: white;">Nome do cartão</p>
+        <img src="https://img.icons8.com/color/48/000000/mastercard-logo.png" alt="Mastercard">
+      </div>
+    </div>
+
+    <div class="transactions">
+      <h3>Transaction</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Date</th>
+            <th>Amount</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Adobe After Effect</td>
+            <td>Sat, 20 Apr 2020</td>
+            <td>$89.00</td>
+            <td class="status-approved">Deposited</td>
+          </tr>
+          <tr>
+            <td>McDonald's</td>
+            <td>Fri, 19 Apr 2020</td>
+            <td>$7.00</td>
+            <td class="status-approved">Deposited</td>
+          </tr>
+          <tr>
+            <td>Levi's</td>
+            <td>Tue, 17 Apr 2020</td>
+            <td>$39.00</td>
+            <td class="status-approved">Deposited</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</body>
+</html>

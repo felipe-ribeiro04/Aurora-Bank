@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Código de Verificação</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #ded9cf;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      background-color: #2f2f36;
+      padding: 500px;
+      border-radius: 8px;
+    }
+
+    .box {
+      background-color: #d8d8d8;
+      border-radius: 16px;
+      padding: 40px;
+      text-align: center;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .box h2 {
+      font-size: 16px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .box p {
+      font-size: 14px;
+      color: #333;
+      margin-bottom: 20px;
+    }
+
+    .otp-inputs {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .otp-inputs input {
+      width: 40px;
+      height: 40px;
+      text-align: center;
+      font-size: 18px;
+      border: 2px solid #30b8e2;
+      border-radius: 5px;
+      outline: none;
+    }
+
+    .confirm-button {
+      background-color: #6558e9;
+      color: white;
+      padding: 12px 0;
+      width: 100%;
+      border: none;
+      border-radius: 30px;
+      font-size: 14px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .confirm-button:hover {
+      background-color: #574bd4;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="box">
+      <h2>CÓDIGO DE VERIFICAÇÃO</h2>
+      <p>Verifica a sua caixa de e-mail, e digite número enviado.</p>
+      <div class="otp-inputs">
+        <input type="text" maxlength="1">
+        <input type="text" maxlength="1">
+        <input type="text" maxlength="1">
+        <input type="text" maxlength="1">
+      </div>
+      <button class="confirm-button">CONFIRMAR</button>
+    </div>
+  </div>
+</body>
+</html>

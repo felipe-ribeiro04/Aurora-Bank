@@ -1,32 +1,112 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <title>Document</title>
+    <link rel="stylesheet" href="styles.css">
+    <title>Login - AuroraPay</title>
 </head>
+<style>
+  body {
+    margin: 0;
+    display: flex;
+    height: 100vh;
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    display: flex;
+    width: 100%;
+}
+
+.left-side {
+    background-color: #483d8b; /* Azul escuro */
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.left-side img {
+    max-width: 90%;
+    height: auto;
+}
+
+.right-side {
+    background-color: #f3f4f6; /* Cinza claro */
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 30px;
+}
+
+.logo{
+  width: 200px; 
+   height: auto;
+}
+
+
+.right-side h1 {
+    margin-bottom: 10px;
+    color: #3b5998; /* Azul do logo */
+    font-size: 50px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+}
+
+label {
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+input {
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+}
+
+button {
+    margin-top: 30px;
+    padding: 20px;
+    background-color: #3b5998; /* Azul do logo */
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: larger;
+    
+    
+}
+
+button:hover {
+    background-color: #2e468e;
+}
+
+</style>
 <body>
-  <div class="login-container">
-    <div class="logo">
-      <img src="img/aurorapay_logo.png" alt="AuroraPay Logo">
+    <div class="container">
+        <div class="left-side">
+            <img src="MulhercomPC.png" alt="Imagem de Login">
+        </div>
+        <div class="right-side">
+          <img src="logo.png" alt="logo" class="logo">
+            <h1>AuroraPay</h1>
+            <form>
+                <label for="cpf">CPF</label>
+                <input type="text" id="cpf" name="cpf" required>
+                <label for="senha">SENHA</label>
+                <input type="password" id="senha" name="senha" required>
+                <button type="submit">Entrar</button>
+            </form>
+        </div>
     </div>
-    <div class="input-group">
-      <label for="cpf">CPF</label>
-      <input type="text" id="cpf" placeholder="Digite seu CPF">
-    </div>
-    <div class="input-group">
-      <label for="senha">SENHA</label>
-      <input type="password" id="senha" placeholder="Digite sua senha">
-    </div>
-    <div class="input-group">
-      <label for="otp">OTP</label>
-      <input type="text" id="otp" placeholder="Digite o código OTP">
-    </div>
-    <div class="button-group">
-      <button>Entrar como funcionário</button>
-      <button>Entrar como Cliente</button>
-    </div>
-  </div>
 </body>
 </html>

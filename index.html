@@ -1,48 +1,83 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
-
-    
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Aurora Pay - Login</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="style_index.css">
 </head>
 <body>
-        <main class ="conteiner">
-            <form>
-                <h1> Login Banco malveder</h1>
-                <div class="input-box1">
-                    <i class="fa-solid fa-user"></i>
-                    <input placeholder="CPF" type="email"> 
-                
-                </div>
+  <main class="container">
+    <div class="topo">
+      <h1>Aurora Pay</h1>
+    </div>
 
-                <div class="input-box2">
-                    <i class="fa-solid fa-lock"></i>
-                    <input placeholder="Senha">
-                   
-                </div>
+    <div class="botoes-tipo">
+      <button type="button" class="ativo" onclick="selecionarTipo('cliente')">Cliente</button>
+      <button type="button" onclick="selecionarTipo('funcionario')">Funcionário</button>
+    </div>
 
-                <div class="input-box3">
-                    <i class="fa-solid fa-key"></i>
-                    <input placeholder="OTP">
-                </div>
+    <div class="formulario">
+      <form method="POST" action="salvar_cadastro.jsp" id="form_login">
+        <input type="hidden" name="tipoUsuario" id="tipoUsuario" value="cliente">
 
-                <div class="Botão-funcionário">
-                    <button type="submit">
-                        Funcionário
-                    </button>
-                </div>
+        <div>
+          <label for="cpf">Usuário</label>
+          <div class="input-wrapper">
+            <input type="text" id="cpf" name="cpf" maxlength="14" placeholder="Digite seu CPF" />
+          </div>
+        </div>
 
-                <div class="Botão-Cliente">
-                    <button type="submit">
-                        Cliente
-                    </button>
-                </div>
-            </form>
-        </main>
+        <div>
+          <label for="senha">Senha</label>
+          <div class="input-wrapper">
+            <input type="password" id="senha" name="senha" placeholder="Digite sua senha" />
+            <i class="fa-solid fa-eye" id="toggleSenha" onclick="toggleSenhaVisivel()"></i>
+          </div>
+        </div>
 
+        <button type="submit" class="botao_login">Acessar minha conta</button>
+      </form>
+    </div>
+  </main>
 
+  <script>
+    // Máscara de CPF
+    document.getElementById('cpf').addEventListener('input', function (e) {
+      let value = e.target.value.replace(/\D/g, '');
+      value = value.replace(/(\d{3})(\d)/, '$1.$2');
+      value = value.replace(/(\d{3})(\d)/, '$1.$2');
+      value = value.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+      e.target.value = value;
+    });
+
+    function toggleSenhaVisivel() {
+      const senhaInput = document.getElementById('senha');
+      const icon = document.getElementById('toggleSenha');
+      if (senhaInput.type === 'password') {
+        senhaInput.type = 'text';
+        icon.classList.remove('fa-eye');
+        icon.classList.add('fa-eye-slash');
+      } else {
+        senhaInput.type = 'password';
+        icon.classList.remove('fa-eye-slash');
+        icon.classList.add('fa-eye');
+      }
+    }
+
+    function selecionarTipo(tipo) {
+      const botoes = document.querySelectorAll('.botoes-tipo button');
+      botoes.forEach(btn => btn.classList.remove('ativo'));
+
+      if (tipo === 'cliente') {
+        botoes[0].classList.add('ativo');
+      } else {
+        botoes[1].classList.add('ativo');
+      }
+
+      document.getElementById('tipoUsuario').value = tipo;
+    }
+  </script>
 </body>
 </html>

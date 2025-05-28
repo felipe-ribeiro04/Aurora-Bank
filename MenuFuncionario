@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Sistema Bancário</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background: #fff;
+    color: #0a2342; /* azul escuro */
+    margin: 0; padding: 0;
+  }
+  header {
+    background-color: #04274d;
+    color: white;
+    padding: 1rem;
+    text-align: center;
+  }
+  nav {
+    display: flex;
+    background-color: #0a2342;
+  }
+  nav button {
+    flex: 1;
+    padding: 1rem;
+    background: #0a2342;
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s;
+  }
+  nav button:hover, nav button.active {
+    background-color: #063366;
+  }
+  section {
+    padding: 1rem 2rem;
+    display: none;
+  }
+  section.active {
+    display: block;
+  }
+  label {
+    display: block;
+    margin-top: 0.7rem;
+    font-weight: bold;
+  }
+  input, select, textarea {
+    width: 100%;
+    padding: 0.4rem;
+    margin-top: 0.2rem;
+    border: 1px solid #0a2342;
+    border-radius: 3px;
+    box-sizing: border-box;
+  }
+  button.submit-btn {
+    margin-top: 1rem;
+    padding: 0.6rem 1.2rem;
+    background-color: #04274d;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+    font-weight: bold;
+  }
+  button.submit-btn:hover {
+    background-color: #063366;
+  }
+  .small-note {
+    font-size: 0.8rem;
+    color: #555;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+  }
+  th, td {
+    border: 1px solid #0a2342;
+    padding: 0.4rem 0.8rem;
+    text-align: left;
+  }
+  th {
+    background-color: #0a2342;
+    color: white;
+  }
+  .error {
+    color: red;
+    margin-top: 0.4rem;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Sistema Bancário</h1>
+</header>
+
+<nav>
+  <button class="tab-btn active" data-tab="abrir-conta">Abertura de Conta</button>
+  <button class="tab-btn" data-tab="encerrar-conta">Encerramento de Conta</button>
+  <button class="tab-btn" data-tab="consulta-dados">Consulta de Dados</button>
+  <button class="tab-btn" data-tab="alterar-dados">Alteração de Dados</button>
+  <button class="tab-btn" data-tab="cadastro-funcionarios">Cadastro de Funcionários</button>
+  <button class="tab-btn" data-tab="gerar-relatorios">Geração de Relatórios</button>
+</nav>
+
+<main>
+  <!-- RF2.1 - Abertura de Conta -->
+  <section id="abrir-conta" class="active">
+    <h2>Abertura de Conta</h2>
+    <form id="formAbrirConta">
+      <label for="tipoConta">Tipo de Conta</label>
+      <select id="tipoConta" name="tipoConta" required>
+        <option value="">--Selecione--</option>
+        <option value="CP">Conta Poupança (CP)</option>
+        <option value="CC">Conta Corrente (CC)</option>
+        <option value="CI">Conta Investimento (CI)</option>
+      </select>
+
+      <div id="camposEspecificos"></div>
+
+      <button type="submit" class="submit-btn">Abrir Conta</button>
+    </form>
+
+    <div id="resultadoConta" style="margin-top:1rem;"></div>
+  </section>
+
+  <!-- RF2.2 - Encerramento de Conta -->
+  <section id="encerrar-conta">
+    <h2>Encerramento de Conta</h2>
+    <form id="formEncerrarConta">
+      <label for="numContaEncerrar">Número da Conta</label>
+      <input type="text" id="numContaEncerrar" name="numContaEncerrar" required />
+
+      <label for="senhaAdminEncerrar">Senha de Administrador</label>
+      <input type="password" id="senhaAdminEncerrar" name="senhaAdminEncerrar" required />
+
+      <label for="otpEncerrar">Código OTP</label>
+      <input type="text" id="otpEncerrar" name="otpEncerrar" required />
+
+      <label for="motivoEncerrar">Motivo do Encerramento</label>
+      <textarea id="motivoEncerrar" name="motivoEncerrar" rows="3" required></textarea>
+
+      <button type="submit" class="submit-btn">Encerrar Conta</button>
+    </form>
+    <div id="resultadoEncerrar" style="margin-top:1rem;"></div>
+  </section>
+
+  <!-- RF2.3 - Consulta de Dados -->
+  <section id="consulta-dados">
+    <h2>Consulta de Dados</h2>
+    <label for="submenuConsulta">Selecione a Visão</label>
+    <select id="submenuConsulta">
+      <option value="">--Selecione--</option>
+      <option value="conta">Conta</option>
+      <option value="funcionario">Funcionário</option>
+      <option value="cliente">Cliente</option>
+    </select>
+
+    <div id="dadosConsulta" style="margin-top:1rem;"></div>
+  </section>
+
+  <!-- RF2.4 - Alteração de Dados -->
+  <section id="alterar-dados">
+    <h2>Alteração de Dados</h2>
+    <form id="formAlterarDados">
+      <label for="tipoAlteracao">Tipo</label>
+      <select id="tipoAlteracao" name="tipoAlteracao" required>
+        <option value="">--Selecione--</option>
+        <option value="conta">Conta</option>
+        <option value="funcionario">Funcionário</option>
+        <option value="cliente">Cliente</option>
+      </select>
+
+      <label for="idAlterar">ID / Número da Conta / Código</label>
+      <input type="text" id="idAlterar" name="idAlterar" required />
+
+      <label for="novoValor">Novo Valor / Dados</label>
+      <textarea id="novoValor" name="novoValor" rows="3" required></textarea>
+
+      <label for="senhaAdminAlterar">Senha de Administrador</label>
+      <input type="password" id="senhaAdminAlterar" name="senhaAdminAlterar" required />
+
+      <button type="submit" class="submit-btn">Alterar Dados</button>
+    </form>
+    <div id="resultadoAlterar" style="margin-top:1rem;"></div>
+  </section>
+
+  <!-- RF2.5 - Cadastro de Funcionários -->
+  <section id="cadastro-funcionarios">
+    <h2>Cadastro de Funcionários</h2>
+    <form id="formCadastroFunc">
+      <label for="nomeFunc">Nome Completo</label>
+      <input type="text" id="nomeFunc" name="nomeFunc" required />
+
+      <label for="permissaoGerente">Permissão Gerente</label>
+      <select id="permissaoGerente" name="permissaoGerente" required>
+        <option value="">--Selecione--</option>
+        <option value="sim">Sim</option>
+        <option value="nao">Não</option>
+      </select>
+
+      <button type="submit" class="submit-btn">Cadastrar Funcionário</button>
+    </form>
+    <div id="resultadoCadastroFunc" style="margin-top:1rem;"></div>
+  </section>
+
+  <!-- RF2.6 - Geração de Relatórios -->
+  <section id="gerar-relatorios">
+    <h2>Geração de Relatórios</h2>
+    <label for="tipoRelatorio">Selecione o Relatório</label>
+    <select id="tipoRelatorio">
+      <option value="">--Selecione--</option>
+      <option value="movimentacoes">Movimentações</option>
+      <option value="inadimplencia">Inadimplência</option>
+      <option value="desempenho">Desempenho de Funcionários</option>
+    </select>
+
+    <div id="relatorioConteudo" style="margin-top:1rem;"></div>
+
+    <button id="btnExportExcel" class="submit-btn" style="margin-top: 1rem;">Exportar para Excel</button>
+    <button id="btnExportPDF" class="submit-btn" style="margin-top: 0.5rem;">Exportar para PDF</button>
+  </section>
+</main>
+
+<script>
+  // Controle das abas
+  const tabs = document.querySelectorAll('nav button.tab-btn');
+  const sections = document.querySelectorAll('main section');
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      tabs.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      const target = tab.dataset.tab;
+      sections.forEach(sec => {
+        if (sec.id === target) sec.classList.add('active');
+        else sec.classList.remove('active');
+      });
+    });
+  });
+
+  // RF2.1 - Abertura de Conta - Campos específicos
+  const tipoContaSelect = document.getElementById('tipoConta');
+  const camposEspecificosDiv = document.getElementById('camposEspecificos');
+  tipoContaSelect.addEventListener('change', () => {
+    const tipo = tipoContaSelect.value;
+    camposEspecificosDiv.innerHTML = '';
+    if (!tipo) return;
+
+    if(tipo === 'CP') {
+      camposEspecificosDiv.innerHTML = `
+        <label for="rendimentos">Rendimentos (% ao ano)</label>
+        <input type="number" id="rendimentos" name="rendimentos" min="0" step="0.01" required />
+      `;
+    } else if(tipo === 'CC') {
+      camposEspecificosDiv.innerHTML = `
+        <label for="limite">Limite de Crédito (R$)</label>
+        <input type="number" id="limite" name="limite" min="0" step="0.01" required />
+      `;
+    } else if(tipo === 'CI') {
+      camposEspecificosDiv.innerHTML = `
+        <label for="tipoInvestimento">Tipo de Investimento</label>
+        <input type="text" id="tipoInvestimento" name="tipoInvestimento" required />
+      `;
+    }
+  });
+
+  // Função para gerar número de conta com dígito verificador simples (ex: soma % 10)
+  function gerarNumeroConta() {
+    const randomNum = Math.floor(100000 + Math.random() * 900000); // 6 dígitos
+    const soma = randomNum.toString().split('').reduce((acc, val) => acc + Number(val), 0);
+    const digito = soma % 10;
+    return `${randomNum}-${digito}`;
+  }
+
+  // Simulação de auditoria
+  function registrarAuditoria(acao) {
+    console.log("Auditoria:", acao);
+  }
+
+  // RF2.1 - Abrir conta
+  document.getElementById('formAbrirConta').addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const tipo = tipoContaSelect.value;
+    if (!tipo) return alert("Selecione o tipo de conta.");
+
+    let dadosEspecificos = '';
+    if (tipo === 'CP') {
+      dadosEspecificos = `Rendimentos: ${document.getElementById('rendimentos').value}%`;
+    } else if (tipo === 'CC') {
+      dadosEspecificos = `Limite: R$ ${document.getElementById('limite').value}`;
+    } else if (tipo === 'CI') {
+      dadosEspecificos = `Investimento: ${document.getElementById('tipoInvestimento').value}`;
+    }
+
+    const numConta = gerarNumeroConta();
+    registrarAuditoria(`Abertura de conta ${numConta} do tipo ${tipo}`);
+
+    document.getElementById('resultadoConta').innerHTML = 
+      `<strong>Conta aberta com sucesso!</strong><br>Número da Conta: ${numConta}<br>${dadosEspecificos}`;
+
+    e.target.reset();
+    camposEspecificosDiv.innerHTML = '';
+  });
+
+  // RF2.2 - Encerramento de Conta (simulação)
+  document.getElementById('formEncerrarConta').addEventListener('submit', (e) => {
+    e.preventDefault();
+    const numConta = e.target.numContaEncerrar.value.trim();
+    const senha = e.target.senhaAdminEncerrar.value;
+    const otp = e.target.otpEncerrar.value;
+    const motivo = e.target.motivoEncerrar.value.trim();
+
+    // Simulações básicas:
+    const senhaAdminValida = (senha === "admin123");
+    const otpValido = (otp === "123456");
+
+    if (!senhaAdminValida) {
+      alert("Senha de administrador inválida.");
+      return;
+    }
+    if (!otpValido) {
+      alert("OTP inválido.");
+      return;
+    }
+
+    // Saldo simulado para bloqueio
+    const saldo = Math.floor(Math.random() * 200) - 50; // pode ser negativo
+
+    if(saldo < 0) {
+      alert("Conta não pode ser encerrada pois possui saldo negativo ou dívidas pendentes.");
+      return;
+    }
+
+    registrarAuditoria(`Encerramento da conta ${numConta} - Motivo: ${motivo}`);
+
+    document.getElementById('resultadoEncerrar').innerHTML = `<strong>Conta ${numConta} encerrada com sucesso.</strong>`;
+
+    e.target.reset();
+  });
+
+  // RF2.3 - Consulta de Dados (simulação)
+  const submenuConsulta = document.getElementById('submenuConsulta');
+  const dadosConsultaDiv = document.getElementById('dadosConsulta');
+
+  submenuConsulta.addEventListener('change', () => {
+    const valor = submenuConsulta.value;
+    if (!valor) {
+      dadosConsultaDiv.innerHTML = '';
+      return;
+    }
+
+    let html = '';
+    if (valor === 'conta') {
+      html = `
+        <table>
+          <thead><tr><th>Conta</th><th>Saldo (R$)</th><th>Score de Crédito</th><th>Projeção Rendimentos (12 meses)</th></tr></thead>
+          <tbody>
+            <tr><td>123456-7</td><td>5.000,00</td><td>850</td><td>600,00</td></tr>
+            <tr><td>234567-8</td><td>1.200,00</td><td>700</td><td>120,00</td></tr>
+          </tbody>
+        </table>
+      `;
+    } else if (valor === 'funcionario') {
+      html = `
+        <table>
+          <thead><tr><th>Código</th><th>Nome</th><th>Desempenho</th></tr></thead>
+          <tbody>
+            <tr><td>F001</td><td>Ana Silva</td><td>Excelente</td></tr>
+            <tr><td>F002</td><td>João Souza</td><td>Bom</td></tr>
+          </tbody>
+        </table>
+      `;
+    } else if (valor === 'cliente') {
+      html = `
+        <table>
+          <thead><tr><th>ID</th><th>Nome</th><th>Score de Crédito</th></tr></thead>
+          <tbody>
+            <tr><td>C001</td><td>Maria Oliveira</td><td>750</td></tr>
+            <tr><td>C002</td><td>Carlos Pereira</td><td>680</td></tr>
+          </tbody>
+        </table>
+      `;
+    }
+
+    dadosConsultaDiv.innerHTML = html;
+  });
+
+  // RF2.4 - Alteração de Dados (simulação)
+  document.getElementById('formAlterarDados').addEventListener('submit', (e) => {
+    e.preventDefault();
+    const tipo = e.target.tipoAlteracao.value;
+    const id = e.target.idAlterar.value.trim();
+    const novoValor = e.target.novoValor.value.trim();
+    const senha = e.target.senhaAdminAlterar.value;
+
+    if (senha !== "admin123") {
+      alert("Senha de administrador inválida.");
+      return;
+    }
+
+    registrarAuditoria(`Alteração em ${tipo} ID ${id}: novo valor "${novoValor}"`);
+
+    document.getElementById('resultadoAlterar').innerHTML = `<strong>${tipo.charAt(0).toUpperCase() + tipo.slice(1)} ${id} alterado com sucesso.</strong>`;
+
+    e.target.reset();
+  });
+
+  // RF2.5 - Cadastro de Funcionários (simulação limite e código)
+  let funcionariosCadastrados = 0;
+  document.getElementById('formCadastroFunc').addEventListener('submit', (e) => {
+    e.preventDefault();
+    const nome = e.target.nomeFunc.value.trim();
+    const permissao = e.target.permissaoGerente.value;
+
+    if (permissao !== 'sim') {
+      alert("Permissão de gerente requerida para cadastro.");
+      return;
+    }
+
+    if(funcionariosCadastrados >= 20) {
+      alert("Limite de 20 funcionários por agência atingido.");
+      return;
+    }
+
+    funcionariosCadastrados++;
+    const codigo = `F${String(funcionariosCadastrados).padStart(3,'0')}`;
+
+    registrarAuditoria(`Cadastro do funcionário ${nome} com código ${codigo}`);
+
+    document.getElementById

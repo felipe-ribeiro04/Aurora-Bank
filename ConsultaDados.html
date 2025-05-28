@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Consulta de Dados - Sistema Bancário</title>
+<style>
+  body { font-family: Arial, sans-serif; background: #fff; color: #0a2342; margin:0; padding:0; }
+  header { background:#04274d; color:#fff; padding:1rem; text-align:center; }
+  main { padding: 1rem 2rem; }
+  label { font-weight:bold; display:block; margin-bottom:0.5rem; }
+  select { width: 100%; padding:0.4rem; border:1px solid #0a2342; border-radius:3px; }
+  table { width:100%; border-collapse: collapse; margin-top:1rem; }
+  th, td { border:1px solid #0a2342; padding:0.4rem 0.8rem; text-align:left; }
+  th { background:#0a2342; color:#fff; }
+</style>
+</head>
+<body>
+<header><h1>Consulta de Dados</h1></header>
+<main>
+  <label for="submenuConsulta">Selecione a Visão</label>
+  <select id="submenuConsulta">
+    <option value="">--Selecione--</option>
+    <option value="conta">Conta</option>
+    <option value="funcionario">Funcionário</option>
+    <option value="cliente">Cliente</option>
+  </select>
+  <div id="dadosConsulta" style="margin-top:1rem;"></div>
+</main>
+
+<script>
+  const submenuConsulta = document.getElementById('submenuConsulta');
+  const dadosConsultaDiv = document.getElementById('dadosConsulta');
+
+  submenuConsulta.addEventListener('change', () => {
+    const valor = submenuConsulta.value;
+    if (!valor) {
+      dadosConsultaDiv.innerHTML = '';
+      return;
+    }
+
+    let html = '';
+    if (valor === 'conta') {
+      html = `
+        <table>
+          <thead><tr><th>Conta</th><th>Saldo (R$)</th><th>Score de Crédito</th><th>Projeção Rendimentos (12 meses)</th></tr></thead>
+          <tbody>
+            <tr><td>123456-7</td><td>5.000,00</td><td>850</td><td>600,00</td></tr>
+            <tr><td>234567-8</td><td>1.200,00</td><td>700</td><td>120,00</td></tr>
+          </tbody>
+        </table>
+      `;
+    } else if (valor === 'funcionario') {
+      html = `
+        <table>
+          <thead><tr><th>Código</th><th>Nome</th><th>Desempenho</th></tr></thead>
+          <tbody>
+            <tr><td>F001</td><td>Ana Silva</td><td>Excelente</td></tr>
+            <tr><td>F002</td><td>João Souza</td><td>Bom</td></tr>
+          </tbody>
+        </table>
+      `;
+    } else if (valor === 'cliente') {
+      html = `
+        <table>
+          <thead><tr><th>ID</th><th>Nome</th><th>Score de Crédito</th></tr></thead>
+          <tbody>
+            <tr><td>C001</td><td>Maria Oliveira</td><td>750</td></tr>
+            <tr><td>C002</td><td>Carlos Pereira</td><td>680</td></tr>
+          </tbody>
+        </table>
+      `;
+    }
+
+    dadosConsultaDiv.innerHTML = html;
+  });
+</script>
+</body>
+</html>

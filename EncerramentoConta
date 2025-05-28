@@ -1,75 +1,166 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Encerramento de Conta - Sistema Bancário</title>
-<style>
-  body { font-family: Arial, sans-serif; background: #fff; color: #0a2342; margin:0; padding:0; }
-  header { background:#04274d; color:#fff; padding:1rem; text-align:center; }
-  main { padding: 1rem 2rem; }
-  label { display:block; margin-top:0.7rem; font-weight:bold; }
-  input, textarea { width:100%; padding:0.4rem; margin-top:0.2rem; border:1px solid #0a2342; border-radius:3px; }
-  button { margin-top:1rem; padding:0.6rem 1.2rem; background:#04274d; color:#fff; border:none; cursor:pointer; border-radius:4px; font-weight:bold; }
-  button:hover { background:#063366; }
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Encerramento de Conta - Sistema Bancário</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      font-family: Arial, sans-serif;
+      background: #fff;
+      color: #222064;
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    .brand-top {
+      background: #f0f0f0;
+      text-align: center;
+      padding: 1rem;
+      font-size: 2rem;
+      font-weight: bold;
+      color: #222064;
+    }
+    header {
+      background: #222064;
+      color: #fff;
+      padding: 1rem;
+      text-align: center;
+    }
+    .container {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+    main {
+      width: 100%;
+      max-width: 400px;
+    }
+    label {
+      display: block;
+      margin-top: 0.7rem;
+      font-weight: bold;
+    }
+    input, textarea {
+      width: 100%;
+      padding: 0.4rem;
+      margin-top: 0.2rem;
+      border: 1px solid #222064;
+      border-radius: 3px;
+    }
+    button {
+      margin-top: 1rem;
+      padding: 0.6rem 1.2rem;
+      background: #222064;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      border-radius: 4px;
+      font-weight: bold;
+    }
+    button:hover {
+      background: #1a1a4f;
+    }
+    .footer-top {
+      background: #f0f0f0;
+      text-align: center;
+      padding: 1.5rem 1rem 0.5rem;
+      font-weight: bold;
+      font-size: 1.6rem;
+      color: #222064;
+    }
+    .footer-bottom {
+      background: #e0e0e0;
+      text-align: center;
+      padding: 0.8rem;
+      font-size: 0.95rem;
+      color: #444;
+    }
+    .footer-bottom a {
+      margin: 0 1rem;
+      color: #444;
+      text-decoration: none;
+    }
+    .footer-bottom a:hover {
+      text-decoration: underline;
+    }
+  </style>
 </head>
 <body>
-<header><h1>Encerramento de Conta</h1></header>
-<main>
-  <form id="formEncerrarConta">
-    <label for="numContaEncerrar">Número da Conta</label>
-    <input type="text" id="numContaEncerrar" name="numContaEncerrar" required />
+  <!-- Nome da marca no topo -->
+  <div class="brand-top">Aurora Pay</div>
 
-    <label for="senhaAdminEncerrar">Senha de Administrador</label>
-    <input type="password" id="senhaAdminEncerrar" name="senhaAdminEncerrar" required />
+  <!-- Cabeçalho principal -->
+  <header><h1>Encerramento de Conta</h1></header>
 
-    <label for="otpEncerrar">Código OTP</label>
-    <input type="text" id="otpEncerrar" name="otpEncerrar" required />
+  <!-- Conteúdo centralizado -->
+  <div class="container">
+    <main>
+      <form id="formEncerrarConta">
+        <label for="numContaEncerrar">Número da Conta</label>
+        <input type="text" id="numContaEncerrar" name="numContaEncerrar" required />
 
-    <label for="motivoEncerrar">Motivo do Encerramento</label>
-    <textarea id="motivoEncerrar" name="motivoEncerrar" rows="3" required></textarea>
+        <label for="senhaAdminEncerrar">Senha de Administrador</label>
+        <input type="password" id="senhaAdminEncerrar" name="senhaAdminEncerrar" required />
 
-    <button type="submit">Encerrar Conta</button>
-  </form>
-  <div id="resultadoEncerrar" style="margin-top:1rem;"></div>
-</main>
+        <label for="otpEncerrar">Código OTP</label>
+        <input type="text" id="otpEncerrar" name="otpEncerrar" required />
 
-<script>
-  function registrarAuditoria(acao) {
-    console.log("Auditoria:", acao);
-  }
+        <label for="motivoEncerrar">Motivo do Encerramento</label>
+        <textarea id="motivoEncerrar" name="motivoEncerrar" rows="3" required></textarea>
 
-  document.getElementById('formEncerrarConta').addEventListener('submit', e => {
-    e.preventDefault();
-    const numConta = e.target.numContaEncerrar.value.trim();
-    const senha = e.target.senhaAdminEncerrar.value;
-    const otp = e.target.otpEncerrar.value;
-    const motivo = e.target.motivoEncerrar.value.trim();
+        <button type="submit">Encerrar Conta</button>
+      </form>
+      <div id="resultadoEncerrar" style="margin-top:1rem;"></div>
+    </main>
+  </div>
 
-    if (senha !== "admin123") {
-      alert("Senha de administrador inválida.");
-      return;
-    }
-    if (otp !== "123456") {
-      alert("OTP inválido.");
-      return;
-    }
+  <!-- Rodapé com links -->
+  <div class="footer-bottom">
+    <a href="#">Início</a>
+    <a href="#">Suporte</a>
+    <a href="#">Termos</a>
+    <a href="#">Política de Privacidade</a>
+  </div>
 
-    // Simular saldo aleatório para bloqueio
-    const saldo = Math.floor(Math.random() * 200) - 50;
-
-    if(saldo < 0) {
-      alert("Conta não pode ser encerrada pois possui saldo negativo ou dívidas pendentes.");
-      return;
+  <script>
+    function registrarAuditoria(acao) {
+      console.log("Auditoria:", acao);
     }
 
-    registrarAuditoria(`Encerramento da conta ${numConta} - Motivo: ${motivo}`);
+    document.getElementById('formEncerrarConta').addEventListener('submit', e => {
+      e.preventDefault();
+      const numConta = e.target.numContaEncerrar.value.trim();
+      const senha = e.target.senhaAdminEncerrar.value;
+      const otp = e.target.otpEncerrar.value;
+      const motivo = e.target.motivoEncerrar.value.trim();
 
-    document.getElementById('resultadoEncerrar').innerHTML = `<strong>Conta ${numConta} encerrada com sucesso.</strong>`;
+      if (senha !== "admin123") {
+        alert("Senha de administrador inválida.");
+        return;
+      }
+      if (otp !== "123456") {
+        alert("OTP inválido.");
+        return;
+      }
 
-    e.target.reset();
-  });
-</script>
+      const saldo = Math.floor(Math.random() * 200) - 50;
+
+      if(saldo < 0) {
+        alert("Conta não pode ser encerrada pois possui saldo negativo ou dívidas pendentes.");
+        return;
+      }
+
+      registrarAuditoria(`Encerramento da conta ${numConta} - Motivo: ${motivo}`);
+
+      document.getElementById('resultadoEncerrar').innerHTML = `<strong>Conta ${numConta} encerrada com sucesso.</strong>`;
+      e.target.reset();
+    });
+  </script>
 </body>
 </html>

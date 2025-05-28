@@ -1,0 +1,197 @@
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+    </style>
+    
+
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Abertura de Conta</title>
+  <link rel="stylesheet" href="style.css">
+  
+</head>
+<style>
+    
+    body {
+      background: linear-gradient(to right, #2c3e50, #3498db);
+      font-family: 'poppins';
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 50px;
+      color: #333;
+    }
+
+    .container {
+      background-color: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+      width: 100%;
+      max-width: 700px;
+      padding: 40px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #2c3e50;
+      margin-bottom: 25px;
+      font-family: 'poppins';
+      font-size: 50px;
+    }
+
+    form {
+      display: flex;
+      flex-direction:column;
+      gap: 20px;
+    }
+
+    label {
+      font-weight: bolder;
+      margin-top: 10px;
+    }
+
+    select, input, button {
+      padding: 14px;
+      border-radius: 16px;
+      border: 2px solid #727070;
+      font-size: 14px;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    button {
+      background-color: #2980b9;
+      color: white;
+      font-weight: bold;
+      border: none;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      width: 20%;
+      
+      
+    }
+
+    button:hover {
+      background-color: #1f618d;
+    }
+
+    .back-link {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .back-link a {
+      color: #2980b9;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .back-link a:hover {
+      text-decoration: underline;
+    }
+
+    .input-group {
+      position: relative;
+    }
+
+    .input-group i {
+      position: absolute;
+      top: 12px;
+      left: 10px;
+      color: #888;
+    }
+
+    .input-group input, .input-group select {
+      padding-left: 35px;
+    }
+  </style>
+
+<body>
+  <div class="container">
+    <h1>Abertura de Conta</h1>
+
+    <form id="formConta" onsubmit="return validarFormulario();">
+      <label for="tipoConta">Tipo de Conta:</label>
+      <select id="tipoConta" name="tipoConta" onchange="mostrarCampos()">
+        <option value="">Selecione sua conta</option>
+        <option value="CP">Conta Poupança</option>
+        <option value="CC">Conta Corrente</option>
+        <option value="CI">Conta Investimento</option>
+      </select>
+
+      <div id="camposComuns">
+        <input type="text" placeholder="Nome completo" required>
+        <input type="text" placeholder="CPF" required pattern="\d{11}" title="Digite 11 dígitos numéricos">
+        <input type="date" placeholder="Data de nascimento" required>
+        <input type="text" placeholder="Telefone" required>
+        <input type="text" placeholder="Endereço completo" required>
+        <input type="password" placeholder="Senha" required>
+      </div>
+
+      <div id="cpCampos" class="hidden">
+        <input type="number" step="0.01" placeholder="Taxa de rendimento (%)" required>
+      </div>
+
+      <div id="ccCampos" class="hidden">
+        <input type="number" placeholder="Limite dinâmico (simulado)" required>
+        <input type="date" placeholder="Data de vencimento" required>
+        <input type="number" step="0.01" placeholder="Taxa de manutenção (%)" required>
+      </div>
+
+      <div id="ciCampos" class="hidden">
+        <select required>
+          <option value="">Perfil de Risco</option>
+          <option value="baixo">Baixo</option>
+          <option value="medio">Médio</option>
+          <option value="alto">Alto</option>
+        </select>
+        <input type="number" placeholder="Valor mínimo de investimento" required>
+      </div>
+
+      <input type="text" id="numeroConta" readonly placeholder="Número da Conta Gerado">
+
+      <button type="submit">Abrir Conta</button>
+      <a class="menu" href="index.html">← Voltar ao Menu</a>
+    </form>
+  </div>
+
+  <script>
+    function mostrarCampos() {
+      const tipo = document.getElementById('tipoConta').value;
+      document.getElementById('cpCampos').classList.add('hidden');
+      document.getElementById('ccCampos').classList.add('hidden');
+      document.getElementById('ciCampos').classList.add('hidden');
+
+      if (tipo === 'CP') {
+        document.getElementById('cpCampos').classList.remove('hidden');
+      } else if (tipo === 'CC') {
+        document.getElementById('ccCampos').classList.remove('hidden');
+      } else if (tipo === 'CI') {
+        document.getElementById('ciCampos').classList.remove('hidden');
+      }
+
+      gerarNumeroConta();
+    }
+
+    function gerarNumeroConta() {
+      const numero = Math.floor(100000 + Math.random() * 900000);
+      const digito = numero % 9; // Simulação de dígito verificador simples
+      document.getElementById('numeroConta').value = `${numero}-${digito}`;
+    }
+
+    function validarFormulario() {
+      const tipo = document.getElementById('tipoConta').value;
+      if (!tipo) {
+        alert("Por favor, selecione o tipo de conta.");
+        return false;
+      }
+      alert("Conta criada com sucesso!");
+      return true;
+    }
+  </script>
+</body>
+</html>

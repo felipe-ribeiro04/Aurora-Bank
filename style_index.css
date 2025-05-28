@@ -1,0 +1,119 @@
+body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #141d26;;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      background-color: #fff;
+      width: 100%;
+      max-width: 380px;
+      border-radius: 20px;
+      padding: 2rem;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .topo {
+      background-color: #0a1a3f;
+      color: white;
+      text-align: center;
+      padding: 1rem 0;
+      /* Ajuste para que o topo ocupe a largura do container e respeite o padding do .container */
+      width: calc(100% + 4rem); /* Soma do padding horizontal do .container */
+      margin-left: -2rem; /* Compensa o padding esquerdo */
+      margin-right: -2rem; /* Compensa o padding direito */
+      margin-top: -2rem; /* Compensa o padding superior */
+      border-radius: 20px 20px 0 0;
+    }
+
+    .topo h1 {
+      margin: 0;
+      font-size: 1.5rem;
+    }
+
+    .botoes-tipo {
+      display: flex;
+      justify-content: space-around;
+      margin: 1.5rem 0;
+      width: 100%;
+    }
+
+    .botoes-tipo button {
+      padding: 0.6rem 1.2rem;
+      border: none;
+      border-radius: 20px;
+      background-color: #e0e0e0;
+      font-weight: bold;
+      color: #0a1a3f;
+      cursor: pointer;
+    }
+
+    .botoes-tipo .ativo {
+      background-color: #0a1a3f;
+      color: white;
+    }
+
+    .formulario {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+    }
+
+    /* Alterado o seletor aqui para aplicar a margem aos divs dentro do form */
+    .formulario form > div {
+      margin-bottom: 1.5rem; /* Este é o espaçamento entre os campos */
+    }
+
+    .formulario label {
+      font-weight: bold;
+      color: #333;
+      margin-bottom: 0.3rem;
+      display: block;
+    }
+
+    .input-wrapper {
+      position: relative;
+      width: 100%;
+    }
+
+    .input-wrapper input {
+      width: 100%;
+      padding: 0.8rem;
+      border: 2px solid #ccc;
+      border-radius: 8px;
+      font-size: 1rem;
+      box-sizing: border-box;
+    }
+
+    .input-wrapper i {
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #fa6400;
+      cursor: pointer;
+    }
+
+    .botao_login {
+      margin-top: 1rem; /* Mantido, pois o último .formulario form > div já terá margin-bottom */
+      padding: 0.8rem;
+      width: 100%;
+      background-color: #0a1a3f;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+
+    .botao_login:hover {
+      background-color: #142b6a;
+    }

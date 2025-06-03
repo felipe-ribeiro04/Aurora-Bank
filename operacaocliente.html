@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Banco Malvader - Operações</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --azul-escuro: #101A26;
+      --azul-claro: #1228A6;
+      --azul-medio: #2a39c7;
+      --ciano: #05AFF2;
+      --ciano-claro: #05DBF2;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #295EA8;
+    }
+
+    .card {
+      background-color: var(--azul-escuro);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      border-radius: 1rem;
+      padding: 1.5rem;
+      box-shadow: 0 10px 30px rgba(5, 175, 242, 0.4);
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 15px 35px rgba(5, 175, 242, 0.6);
+    }
+
+    .btn {
+      background-color: var(--ciano-claro);
+      color: black;
+      font-weight: 600;
+      border-radius: 0.5rem;
+      padding: 0.5rem 1rem;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    .btn:hover {
+      background-color: white;
+      color: var(--azul-medio);
+    }
+
+    input {
+      border-radius: 0.5rem;
+      padding: 0.5rem;
+      border: 1px solid #ccc;
+      color: black;
+      width: 100%;
+      margin-bottom: 0.75rem;
+    }
+  </style>
+  <script>
+    let saldo = 1000;
+    let limite = 500;
+
+    function formatar(valor) {
+      return valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+    }
+
+    function atualizarMensagem(id, mensagem) {
+      document.getElementById(id).textContent = mensagem;
+    }
+
+    function realizarDeposito() {
+      const valor = parseFloat(document.getElementById('deposito').value);
+      if (!isNaN(valor) && valor > 0) {
+        saldo += valor;
+        atualizarMensagem('saidaDeposito', `Depósito de ${formatar(valor)} realizado com sucesso.`);
+        atualizarMensagem('saidaSaldo', `Seu saldo atual é ${formatar(saldo)}.`);
+      } else {
+        atualizarMensagem('saidaDeposito', 'Valor inválido.');
+      }
+    }
+
+    function realizarSaque() {
+      const valor = parseFloat(document.getElementById('saque').value);
+      if (!isNaN(valor) && valor > 0 && valor <= saldo + limite) {
+        saldo -= valor;
+        atualizarMensagem('saidaSaque', `Saque de ${formatar(valor)} realizado.`);
+        atualizarMensagem('saidaSaldo', `Seu saldo atual é ${formatar(saldo)}.`);
+      } else {
+        atualizarMensagem('saidaSaque', 'Saque não permitido.');
+      }
+    }
+
+    function realizarTransferencia() {
+      const conta = document.getElementById('destino').value;
+      const valor = parseFloat(document.getElementById('valorTransferencia').value);
+      if (conta && !isNaN(valor) && valor > 0 && valor <= saldo + limite) {
+        saldo -= valor;
+        atualizarMensagem('saidaTransferencia', `Transferência de ${formatar(valor)} para a conta ${conta} realizada.`);
+        atualizarMensagem('saidaSaldo', `Seu saldo atual é ${formatar(saldo)}.`);
+      } else {
+        atualizarMensagem('saidaTransferencia', 'Transferência não permitida.');
+      }
+    }
+
+    function consultarSaldo() {
+      atualizarMensagem('saidaSaldo', `Seu saldo atual é ${formatar(saldo)}.`);
+    }
+
+    function consultarLimite() {
+      atualizarMensagem('saidaLimite', `Seu limite disponível é ${formatar(limite)}.`);
+    }
+
+    window.onload = function() {
+      consultarSaldo();
+    };
+  </script>
+</head>
+<body class="min-h-screen p-6 text-white">
+  <div class="max-w-6xl mx-auto">
+    <h1 class="text-3xl font-bold text-center mb-8 text-[color:var(--ciano-claro)] animate-pulse">Aurorapay</h1>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div class="card">
+        <h2 class="text-xl font-semibold mb-4">Depósito</h2>
+        <input type="number" id="deposito" placeholder="Valor a depositar" />
+        <button onclick="realizarDeposito()" class="btn w-full">Depositar</button>
+        <div class="mt-2 text-sm font-medium" id="saidaDeposito"></div>
+      </div>
+
+      <div class="card">
+        <h2 class="text-xl font-semibold mb-4">Saque</h2>
+        <input type="number" id="saque" placeholder="Valor a sacar" />
+        <button onclick="realizarSaque()" class="btn w-full">Sacar</button>
+        <div class="mt-2 text-sm font-medium" id="saidaSaque"></div>
+      </div>
+
+      <div class="card">
+        <h2 class="text-xl font-semibold mb-4">Transferência</h2>
+        <input type="text" id="destino" placeholder="Conta de destino" />
+        <input type="number" id="valorTransferencia" placeholder="Valor da transferência" />
+        <button onclick="realizarTransferencia()" class="btn w-full">Transferir</button>
+        <div class="mt-2 text-sm font-medium" id="saidaTransferencia"></div>
+      </div>
+
+      <div class="card">
+        <h2 class="text-xl font-semibold mb-4">Consultar Saldo</h2>
+        <button onclick="consultarSaldo()" class="btn w-full">Ver Saldo</button>
+        <div class="mt-2 text-lg font-bold" id="saidaSaldo"></div>
+      </div>
+
+      <div class="card">
+        <h2 class="text-xl font-semibold mb-4">Consultar Limite</h2>
+        <button onclick="consultarLimite()" class="btn w-full">Ver Limite</button>
+        <div class="mt-2 text-sm font-medium" id="saidaLimite"></div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

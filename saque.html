@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Banco Malvader - Saque</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="saque.css">
+  <script>
+    let saldo = 1000;
+    let limite = 500;
+
+    function formatar(valor) {
+      return valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+    }
+
+    function realizarSaque() {
+      const valor = parseFloat(document.getElementById('saque').value);
+      if (!isNaN(valor) && valor > 0 && valor <= saldo + limite) {
+        saldo -= valor;
+        document.getElementById('saidaSaque').textContent = `Saque de ${formatar(valor)} realizado.`;
+        document.getElementById('saidaSaldo').textContent = `Seu saldo atual é ${formatar(saldo)}.`;
+      } else {
+        document.getElementById('saidaSaque').textContent = 'Saque não permitido.';
+      }
+    }
+  </script>
+</head>
+<body>
+    <div class="container">
+        <h2>Saque</h2>
+        <div class="input-group">
+            <input type="number" placeholder="Digite o valor" />
+            <button>Sacar</button>
+        </div>
+        <div class="mensagem">Saque não permitido.</div>
+    </div>
+
+</body>
+</html>

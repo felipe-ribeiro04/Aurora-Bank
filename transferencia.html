@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Transferência - Aurorapay</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="transferencia.css">
+ 
+</head>
+<body class="min-h-screen p-6 text-white">
+  <div class="max-w-lg mx-auto">
+    <h1 class="text-3xl font-bold text-center mb-8 text-[color:var(--ciano-claro)]">Transferência - Aurorapay</h1>
+
+    <div class="card">
+      <h2 class="text-xl font-semibold mb-4">Transferência</h2>
+      <input type="text" id="destino" placeholder="Conta de destino" />
+      <input type="number" id="valorTransferencia" placeholder="Valor da transferência" />
+      <button onclick="realizarTransferencia()" class="btn w-full">Transferir</button>
+      <div class="mt-2 text-sm font-medium" id="saidaTransferencia"></div>
+    </div>
+
+    <div class="mt-8 text-center">
+      <a href="index.html" class="btn">Voltar</a>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Aurorapay</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="deposito.css">
+
+</head>
+<body class="min-h-screen p-6 text-white">
+  <div class="max-w-2xl mx-auto">
+    <h1 class="text-3xl font-bold text-center mb-8 text-[color:var(--ciano-claro)] animate-pulse">Aurorapay</h1>
+
+    <div class="card rounded-2xl shadow-md p-6">
+      <h2 class="text-xl font-semibold mb-4">Depósito</h2>
+      <input type="number" id="deposito" class="w-full border rounded-lg p-2 mb-3 text-black" placeholder="Valor a depositar" />
+      <button onclick="realizarDeposito()" class="btn w-full py-2 rounded-lg transition-colors">Depositar</button>
+      <div class="mt-2 text-sm font-medium text-black" id="saidaDeposito"></div>
+      <div class="mt-2 text-lg font-bold text-black" id="saidaSaldo"></div>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Aurora Pay - Alteração de Funcionário</title>
+  <style>
+    :root {
+      --azul-escuro: #101A26;
+      --azul-claro: #1228A6;
+      --azul-medio: #2a39c7;
+      --azul-medio-claro: #3c4adb;
+      --ciano: #05AFF2;
+      --ciano-claro: #05DBF2;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f5f7fa;
+      margin: 0;
+      padding: 0;
+      color: var(--azul-escuro);
+    }
+
+    header {
+      background-color: var(--azul-escuro);
+      color: white;
+      padding: 20px 40px;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 24px;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 40px auto;
+      background-color: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+    }
+
+    h2 {
+      color: var(--azul-claro);
+      margin-bottom: 20px;
+    }
+
+    form {
+      display: grid;
+      gap: 20px;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    }
+
+    label {
+      display: block;
+      font-weight: 500;
+      font-size: 14px;
+      margin-bottom: 6px;
+      color: var(--azul-claro);
+    }
+
+    input,
+    select {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 14px;
+    }
+
+    .full-width {
+      grid-column: 1 / -1;
+    }
+
+    .actions {
+      grid-column: 1 / -1;
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 14px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .btn-salvar {
+      background-color: var(--azul-medio);
+      color: white;
+    }
+
+    .btn-salvar:hover {
+      background-color: var(--azul-claro);
+    }
+
+    .btn-cancelar {
+      background-color: #e5e7eb;
+      color: #333;
+    }
+
+    .btn-cancelar:hover {
+      background-color: #d1d5db;
+    }
+
+    @media (max-width: 600px) {
+      .actions {
+        flex-direction: column;
+        align-items: stretch;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Aurora Pay - Alterar Dados do Funcionário</h1>
+  </header>
+
+  <div class="container">
+    <h2>Informações do Funcionário</h2>
+    <form>
+      <div>
+        <label for="nome">Nome Completo</label>
+        <input type="text" id="nome" name="nome" value="João da Silva">
+      </div>
+
+      <div>
+        <label for="email">E-mail</label>
+        <input type="email" id="email" name="email" value="joao.silva@aurorapay.com">
+      </div>
+
+      <div>
+        <label for="telefone">Telefone</label>
+        <input type="tel" id="telefone" name="telefone" value="(11) 91234-5678">
+      </div>
+
+      <div>
+        <label for="cargo">Cargo</label>
+        <input type="text" id="cargo" name="cargo" value="Analista Financeiro">
+      </div>
+
+      <div>
+        <label for="departamento">Departamento</label>
+        <select id="departamento" name="departamento">
+          <option value="financeiro" selected>Financeiro</option>
+          <option value="tecnologia">Tecnologia</option>
+          <option value="comercial">Comercial</option>
+          <option value="rh">Recursos Humanos</option>
+        </select>
+      </div>
+
+      <div>
+        <label for="status">Status</label>
+        <select id="status" name="status">
+          <option value="ativo" selected>Ativo</option>
+          <option value="inativo">Inativo</option>
+        </select>
+      </div>
+
+      <div class="full-width actions">
+        <button type="submit" class="btn-salvar">Salvar Alterações</button>
+        <button type="button" class="btn-cancelar">Cancelar</button>
+      </div>
+    </form>
+  </div>
+</body>
+</html>

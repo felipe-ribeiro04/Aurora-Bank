@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Aurora Pay - Logs de Auditoria</title>
+  <style>
+    :root {
+      --azul-escuro: #101A26;
+      --azul-claro: #1228A6;
+      --azul-medio: #2a39c7;
+      --azul-medio-claro: #3c4adb;
+      --ciano: #05AFF2;
+      --ciano-claro: #05DBF2;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background-color: #f5f7fa;
+      color: var(--azul-escuro);
+    }
+
+    header {
+      background-color: var(--azul-escuro);
+      color: white;
+      padding: 20px 40px;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 24px;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 30px auto;
+      padding: 0 20px;
+    }
+
+    .filters {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 20px;
+      margin-bottom: 30px;
+    }
+
+    .filters label {
+      font-size: 14px;
+      color: var(--azul-claro);
+      margin-bottom: 6px;
+      display: block;
+    }
+
+    .filters input,
+    .filters select {
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      width: 100%;
+      background: white;
+    }
+
+    .filters button {
+      background-color: var(--azul-medio);
+      color: white;
+      border: none;
+      padding: 10px;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-top: 24px;
+    }
+
+    .filters button:hover {
+      background-color: var(--azul-claro);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background-color: white;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 1px 5px rgba(0, 0, 0, 0.08);
+    }
+
+    th, td {
+      padding: 12px 16px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #e8ebf7;
+      color: var(--azul-escuro);
+      font-weight: 600;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f9fafb;
+    }
+
+    .tag {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 500;
+    }
+
+    .info { background: var(--ciano); color: white; }
+    .success { background: #10b981; color: white; }
+    .warning { background: #facc15; color: #333; }
+    .danger { background: #ef4444; color: white; }
+
+    @media (max-width: 768px) {
+      .filters {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Aurora Pay - Logs de Auditoria</h1>
+  </header>
+
+  <div class="container">
+    <div class="filters">
+      <div>
+        <label for="usuario">Usuário</label>
+        <input type="text" id="usuario" placeholder="Nome ou ID do usuário">
+      </div>
+      <div>
+        <label for="acao">Ação</label>
+        <select id="acao">
+          <option value="">Todas</option>
+          <option value="login">Login</option>
+          <option value="update">Atualização</option>
+          <option value="delete">Exclusão</option>
+        </select>
+      </div>
+      <div>
+        <label for="data">Data</label>
+        <input type="date" id="data">
+      </div>
+      <div>
+        <button>Filtrar</button>
+      </div>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Data</th>
+          <th>Usuário</th>
+          <th>Ação</th>
+          <th>Descrição</th>
+          <th>IP</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>10/06/2025 14:32</td>
+          <td>joao.silva</td>
+          <td><span class="tag info">Login</span></td>
+          <td>Login bem-sucedido</td>
+          <td>192.168.1.10</td>
+        </tr>
+        <tr>
+          <td>10/06/2025 14:35</td>
+          <td>joao.silva</td>
+          <td><span class="tag success">Atualização</span></td>
+          <td>Atualizou dados da conta</td>
+          <td>192.168.1.10</td>
+        </tr>
+        <tr>
+          <td>10/06/2025 15:00</td>
+          <td>ana.costa</td>
+          <td><span class="tag danger">Exclusão</span></td>
+          <td>Removeu registro de pagamento</td>
+          <td>192.168.1.15</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</body>
+</html>
